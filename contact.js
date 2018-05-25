@@ -68,7 +68,8 @@ program
     .description('View all contacts')
     .action(() => {
         getAllContacts()
-    })
+    });
+
 
 program.parse(process.argv); 
 

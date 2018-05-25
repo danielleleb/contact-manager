@@ -76,4 +76,6 @@ const getAllContacts = () => {
     })
 }
 
+
+
 module.exports = { addContact, getContact, deleteContact, getAllContacts }
