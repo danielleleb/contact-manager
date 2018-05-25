@@ -55,11 +55,11 @@ program
     .action(name => getContact(name));
 
 program
-    .command('deleteContact <name>')
+    .command('deleteContact <name> [_id]')
     .alias('d')
     .description('Delete a contact')
-    .action((name) => {
-        deleteContact(name)
+    .action((name, _id) => {
+        deleteContact(name, _id)
     });
 
 program 

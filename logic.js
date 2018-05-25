@@ -38,14 +38,34 @@ const getContact = (name) => {
     });
 };
 
-const deleteContact = (name) => {
+const deleteContact = (name, id) => {
     const search = new RegExp(name, 'i');
-    Contact.findOneAndRemove({firstname: search})
-    .exec((err, contact) => {
-        assert.equal(null, err);
-        console.info("Successfully deleted.");
-        mongoose.disconnect();
-    })
+    // Contact.findOneAndRemove({firstname: search})
+    if (id) {
+        Contact.findByIdAndRemove(id)
+        .exec((err, contact) => {
+            assert.equal(null, err);
+            console.info("Successfully deleted.");
+            mongoose.disconnect();
+        })
+    } else {
+        Contact.find({$or: [{firstname: search}, {lastname: search}]})
+        .exec((err, contact) => {
+            if (contact.length > 1) {
+                assert.equal(null, err);
+                console.info(contact)
+                console.info("Multiple matches found. Please try again and specify contact ID.")
+                mongoose.disconnect();
+            } else {
+                Contact.remove()
+                .exec((err, contact) => {
+                    assert.equal(null, err);
+                    console.info("Successfully deleted.");
+                    mongoose.disconnect();
+                })
+            }
+        })
+    }
 };
 
 const getAllContacts = () => {
