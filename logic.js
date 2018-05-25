@@ -38,4 +38,14 @@ const getContact = (name) => {
     });
 };
 
-module.exports = { addContact, getContact }
+const deleteContact = (name) => {
+    const search = new RegExp(name, 'i');
+    Contact.findOneAndRemove({firstname: search})
+    .exec((err, contact) => {
+        assert.equal(null, err);
+        console.info("Successfully deleted.");
+        mongoose.disconnect();
+    })
+};
+
+module.exports = { addContact, getContact, deleteContact }

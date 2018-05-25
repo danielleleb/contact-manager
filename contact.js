@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 const program = require('commander');
-const { addContact, getContact } = require('./logic');
+const { addContact, getContact, deleteContact } = require('./logic');
 const { prompt } = require('inquirer');
 
 const questions = [
@@ -53,6 +53,14 @@ program
     .alias('r')
     .description('Get contact')
     .action(name => getContact(name));
+
+program
+    .command('deleteContact')
+    .alias('d')
+    .description('Delete a contact')
+    .action((firstname) => {
+        deleteContact({firstname})
+    })
 
 program.parse(process.argv); 
 
