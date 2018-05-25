@@ -55,12 +55,14 @@ program
     .action(name => getContact(name));
 
 program
-    .command('deleteContact')
+    .command('deleteContact <name>')
     .alias('d')
     .description('Delete a contact')
-    .action((firstname) => {
-        deleteContact({firstname})
-    })
+    .action((name) => {
+        deleteContact(name)
+    });
+
+
 
 program.parse(process.argv); 
 
