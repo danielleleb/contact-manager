@@ -48,4 +48,12 @@ const deleteContact = (name) => {
     })
 };
 
-module.exports = { addContact, getContact, deleteContact }
+const getAllContacts = () => {
+    Contact.find({})
+    .exec((err, contacts) => {
+        console.info(contacts)
+        mongoose.disconnect();
+    })
+}
+
+module.exports = { addContact, getContact, deleteContact, getAllContacts }
